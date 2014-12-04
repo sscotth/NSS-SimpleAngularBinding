@@ -9,6 +9,21 @@
 <body>
   <div class="container" ng-controller="TodoController as todoCtrl">
     <h1>My Todos</h1>
+    <form>
+      <label>Name</label><input type="text">
+      <label>Description</label><input type="text">
+      <label>Due Date</label><input type="date">
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Task Name</th>
+          <th>Task Description</th>
+          <th>Tash Due Date</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </div>
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="js/main.js"></script>
