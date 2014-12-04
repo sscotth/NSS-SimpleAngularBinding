@@ -24,6 +24,7 @@
 
       vm.addNewTask = function(){
         vm.tasks.push(vm.newTask);
+        vm.newTask = null;
       };
 
     });
