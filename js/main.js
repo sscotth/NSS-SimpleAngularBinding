@@ -20,7 +20,12 @@
           desc: 'Profit!',
           due: 'April 2015'
         }
-      ]
+      ];
+
+      vm.addNewTask = function(){
+        vm.tasks.push(vm.newTask);
+      };
+
     });
 
 }());
