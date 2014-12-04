@@ -1,11 +1,9 @@
 ;(function(){
   'use strict';
 
-  angular.module('myApp', [])
-    .controller('SimpleController', function(){
+  angular.module('todoApp', [])
+    .controller('TodoController', function(){
       var vm = this;
-      vm.name = 'Scott';
-      vm.friends = ['Ashley', 'Bob', 'Carley', 'Dave'];
     });
 
 }());
