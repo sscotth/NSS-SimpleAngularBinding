@@ -22,7 +22,13 @@
           <th>Tash Due Date</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody>
+        <tr ng-repeat="task in todoCtrl.tasks">
+          <td>{{task.name}}</td>
+          <td>{{task.desc}}</td>
+          <td>{{task.due}}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
   <script src="bower_components/angular/angular.min.js"></script>
