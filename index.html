@@ -13,6 +13,9 @@
     Name: <input type="text" ng-model="name" /> {{name}}
 
     <h2>My Friends</h2>
+    New Friend: <input type="text" ng-model="newFriend" />
+    <button ng-click="friends.push(newFriend)">Add</button>
+    <br />
     Search: <input type="text" ng-model="friendSearchQuery" />
     <br />
     <a href="#" ng-click="friendReverse=!friendReverse">Sort</a>
