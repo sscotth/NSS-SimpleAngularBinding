@@ -9,19 +9,22 @@
           name: 'Learn Angular',
           desc: 'If I could learn Angular I\'d be sooooo happy!',
           due: 'Today',
-          priority: 'high'
+          priority: 'high',
+          image: 'http://i.imgur.com/IJMGmz8.png'
         },
         {
           name: 'Finish Tic Tac Toe',
           desc: 'Firebase Arrrrggggghhhhh!',
           due: 'Monday',
-          priority: 'medium'
+          priority: 'medium',
+          image: 'http://i.imgur.com/4NPS39X.jpg'
         },
         {
           name: 'Get a job',
           desc: 'Profit!',
           due: 'April 2015',
-          priority: 'medium'
+          priority: 'medium',
+          image: 'http://i.imgur.com/VDHV0KT.jpg'
         }
       ];
 

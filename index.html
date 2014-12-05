@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My Todo App</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   <div class="container" ng-controller="TodoController as todoCtrl">
@@ -45,6 +46,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="task in todoCtrl.tasks">
+          <td><img class="todo-img" ng-src="{{task.image}}"></td>
           <td>{{task.name}}</td>
           <td>{{task.desc}}</td>
           <td>{{task.due | date}}</td>
