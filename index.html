@@ -9,11 +9,14 @@
 <body>
   <div class="container" ng-controller="TodoController as todoCtrl">
     <h1>My Todos</h1>
-    <form>
-      <label>Name</label><input type="text" ng-model="todoCtrl.newTask.name">
-      <label>Description</label><input type="text" ng-model="todoCtrl.newTask.desc">
-      <label>Due Date</label><input type="date" ng-model="todoCtrl.newTask.due">
-      <button ng-click="todoCtrl.addNewTask()">Add Task</button>
+    <form name="myForm" ng-submit="myForm.$valid && todoCtrl.addNewTask()" novalidate>
+      <label>Name</label>
+      <input type="text" ng-model="todoCtrl.newTask.name" required>
+      <label>Description</label>
+      <input type="text" ng-model="todoCtrl.newTask.desc" required>
+      <label>Due Date</label>
+      <input type="date" ng-model="todoCtrl.newTask.due" required>
+      <input type="submit">Add Task</input>
     </form>
     <table>
       <thead>
