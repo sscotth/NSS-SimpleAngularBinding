@@ -2,40 +2,37 @@
   'use strict';
 
   angular.module('todoApp', [])
-    .controller('TodoController', function(){
+    .controller('TodoController', function($http){
       var vm = this;
-      vm.tasks = [
-        {
-          name: 'Learn Angular',
-          desc: 'If I could learn Angular I\'d be sooooo happy!',
-          due: 'Today',
-          priority: 'high',
-          image: 'http://i.imgur.com/IJMGmz8.png'
-        },
-        {
-          name: 'Finish Tic Tac Toe',
-          desc: 'Firebase Arrrrggggghhhhh!',
-          due: 'Monday',
-          priority: 'medium',
-          image: 'http://i.imgur.com/4NPS39X.jpg'
-        },
-        {
-          name: 'Get a job',
-          desc: 'Profit!',
-          due: 'April 2015',
-          priority: 'medium',
-          image: 'http://i.imgur.com/VDHV0KT.jpg'
-        }
-      ];
+
+      $http.get('https://omgttt.firebaseio.com/list.json')
+        .success(function(data){
+           vm.tasks = data;
+        })
+        .error(function(err){
+          console.log(err);
+        });
 
       vm.addNewTask = function(){
-        vm.tasks.push(vm.newTask);
-        vm.newTask = _freshTask();
+        $http.post('https://omgttt.firebaseio.com/list.json', vm.newTask)
+          .success(function(data){
+            vm.tasks[data.name] = vm.newTask;
+            vm.newTask = _freshTask();
+          })
+          .error(function(err){
+            console.log(err);
+          });
       };
 
-      vm.removeTodo = function(todo){
-        var index = vm.tasks.indexOf(todo);
-        vm.tasks.splice(index,1);
+      vm.removeTodo = function(todoId){
+        var url = 'https://omgttt.firebaseio.com/list/' + todoId + '.json';
+        $http.delete(url)
+          .success(function(){
+            delete vm.tasks[todo];
+          })
+          .error(function(err){
+            console.log(err);
+          });
       };
 
       vm.newTask = _freshTask();

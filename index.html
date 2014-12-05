@@ -45,13 +45,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="task in todoCtrl.tasks">
+        <tr ng-repeat="(taskId, task) in todoCtrl.tasks">
           <td><img class="todo-img" ng-src="{{task.image}}"></td>
           <td>{{task.name}}</td>
           <td>{{task.desc}}</td>
           <td>{{task.due | date}}</td>
           <td>{{task.priority}}</td>
-          <td><button ng-click="todoCtrl.removeTodo(task)">Delete</button></td>
+          <td><button ng-click="todoCtrl.removeTodo(taskId)">Delete</button></td>
         </tr>
       </tbody>
     </table>
