@@ -11,17 +11,26 @@
   <div class="container" ng-controller="TodoController as todoCtrl">
     <h1>My Todos</h1>
     <form name="myForm" ng-submit="myForm.$valid && todoCtrl.addNewTask()" novalidate>
-      <label>Name</label>
-      <input type="text" ng-model="todoCtrl.newTask.name" required>
-      <label>Description</label>
-      <input type="text" ng-model="todoCtrl.newTask.desc" required>
-      <label>Due Date</label>
-      <input type="date" ng-model="todoCtrl.newTask.due" required>
-      <select ng-model="todoCtrl.newTask.priority">
-        <option value="{{val}}" ng-repeat="(val, text) in todoCtrl.priorityOptions">
-          {{text}}
-        </option>
-      </select>
+      <div class="form-group">
+        <label class="control-label">Name</label>
+        <input class="form-control" type="text" ng-model="todoCtrl.newTask.name" required>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Description</label>
+        <input class="form-control" type="text" ng-model="todoCtrl.newTask.desc" required>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Due Date</label>
+        <input class="form-control" type="date" ng-model="todoCtrl.newTask.due" required>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Priority</label>
+        <select ng-model="todoCtrl.newTask.priority">
+          <option value="{{val}}" ng-repeat="(val, text) in todoCtrl.priorityOptions">
+            {{text}}
+          </option>
+        </select>
+      </div>
       <input type="submit" value="Add Task" ng-show="myForm.$valid">
     </form>
     <table>
