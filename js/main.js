@@ -37,6 +37,13 @@
 
       vm.newTask = _freshTask();
 
+      vm.priorityOptions = {
+        high: 'High',
+        medium: 'Medium',
+        low: 'Low',
+        whocares: 'Whatev'
+      };
+
       function _freshTask(){
         return {
           priority: 'low'

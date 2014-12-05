@@ -17,9 +17,9 @@
       <label>Due Date</label>
       <input type="date" ng-model="todoCtrl.newTask.due" required>
       <select ng-model="todoCtrl.newTask.priority">
-        <option value="low">Low</option>
-        <option value="medium" selected>Medium</option>
-        <option value="high">High</option>
+        <option value="{{val}}" ng-repeat="(val, text) in todoCtrl.priorityOptions">
+          {{text}}
+        </option>
       </select>
       <input type="submit" value="Add Task" ng-show="myForm.$valid">
     </form>
