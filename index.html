@@ -11,15 +11,15 @@
   <div class="container" ng-controller="TodoController as todoCtrl">
     <h1>My Todos</h1>
     <form name="myForm" ng-submit="myForm.$valid && todoCtrl.addNewTask()" novalidate>
-      <div class="form-group">
+      <div class="form-group" ng-class="{'has-error': !todoCtrl.newTask.name}">
         <label class="control-label">Name</label>
         <input class="form-control" type="text" ng-model="todoCtrl.newTask.name" required>
       </div>
-      <div class="form-group">
+      <div class="form-group" ng-class="{'has-error': !todoCtrl.newTask.desc}">
         <label class="control-label">Description</label>
         <input class="form-control" type="text" ng-model="todoCtrl.newTask.desc" required>
       </div>
-      <div class="form-group">
+      <div class="form-group" ng-class="{'has-error': !todoCtrl.newTask.due}">
         <label class="control-label">Due Date</label>
         <input class="form-control" type="date" ng-model="todoCtrl.newTask.due" required>
       </div>
