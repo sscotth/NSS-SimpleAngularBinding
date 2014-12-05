@@ -21,6 +21,7 @@
           <th>Task Name</th>
           <th>Task Description</th>
           <th>Tash Due Date</th>
+          <th>Remove Task</th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +29,7 @@
           <td>{{task.name}}</td>
           <td>{{task.desc}}</td>
           <td>{{task.due}}</td>
+          <td><button ng-click="todoCtrl.removeTodo(task)">Delete</button></td>
         </tr>
       </tbody>
     </table>
