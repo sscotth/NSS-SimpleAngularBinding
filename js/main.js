@@ -1,7 +1,17 @@
 ;(function(){
   'use strict';
 
-  angular.module('todoApp', [])
+  angular.module('todoApp', ['ngRoute'])
+    .config(function($routeProvider){
+      $routeProvider
+      .when('/', {
+        templateUrl: 'views/table.html'
+      })
+      .when('/new', {
+        templateUrl: 'views/form.html'
+      })
+      .otherwise({redirectTo: '/'});
+    })
     .controller('TodoController', function($http){
       var vm = this;
 

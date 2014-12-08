@@ -1,0 +1,23 @@
+<form name="myForm" ng-submit="myForm.$valid && todoCtrl.addNewTask()" novalidate>
+  <div class="form-group" ng-class="{'has-error': !todoCtrl.newTask.name}">
+    <label class="control-label">Name</label>
+    <input class="form-control" type="text" ng-model="todoCtrl.newTask.name" required>
+  </div>
+  <div class="form-group" ng-class="{'has-error': !todoCtrl.newTask.desc}">
+    <label class="control-label">Description</label>
+    <input class="form-control" type="text" ng-model="todoCtrl.newTask.desc" required>
+  </div>
+  <div class="form-group" ng-class="{'has-error': !todoCtrl.newTask.due}">
+    <label class="control-label">Due Date</label>
+    <input class="form-control" type="date" ng-model="todoCtrl.newTask.due" required>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Priority</label>
+    <select ng-model="todoCtrl.newTask.priority">
+      <option value="{{val}}" ng-repeat="(val, text) in todoCtrl.priorityOptions">
+        {{text}}
+      </option>
+    </select>
+  </div>
+  <input type="submit" value="Add Task" ng-disabled="myForm.$invalid">
+</form>

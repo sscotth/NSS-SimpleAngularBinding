@@ -11,12 +11,12 @@
 <body>
   <div class="container" ng-controller="TodoController as todoCtrl">
     <h1>My Todos</h1>
-    <div ng-include="'views/form.html'"></div>
-    <div ng-include="'views/table.html'"></div>
+    <div ng-view></div>
   </div>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
