@@ -5,7 +5,7 @@
       <th>Task Description</th>
       <th>Tash Due Date</th>
       <th>Priority</th>
-      <th>Remove Task</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +15,10 @@
       <td>{{task.desc}}</td>
       <td>{{task.due | date}}</td>
       <td>{{task.priority}}</td>
-      <td><button ng-click="todoCtrl.removeTodo(taskId)">Delete</button></td>
+      <td>
+        <a class="btn btn-primary" href="/#/{{taskId}}">Show</a>
+        <button ng-click="todoCtrl.removeTodo(taskId)">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>

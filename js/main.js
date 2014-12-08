@@ -14,7 +14,23 @@
         controller: 'TodoController',
         controllerAs: 'todoCtrl'
       })
+      .when('/:id', {
+        templateUrl: 'views/show.html',
+        controller: 'ShowController',
+        controllerAs: 'show'
+      })
       .otherwise({redirectTo: '/'});
+    })
+    .controller('ShowController', function($http, $routeParams){
+      var vm = this;
+      var id = $routeParams.id;
+      $http.get('https://omgttt.firebaseio.com/list/' + id + '.json')
+        .success(function(data){
+          vm.task = data;
+        })
+        .error(function(err){
+          console.log(err);
+        });
     })
     .controller('TodoController', function($http){
       var vm = this;
