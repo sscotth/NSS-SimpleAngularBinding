@@ -7,12 +7,12 @@
       .when('/', {
         templateUrl: 'views/table.html',
         controller: 'TodoController',
-        controllerAs: 'todoCtrl'
+        controllerAs: 'todo'
       })
       .when('/new', {
         templateUrl: 'views/form.html',
         controller: 'TodoController',
-        controllerAs: 'todoCtrl'
+        controllerAs: 'todo'
       })
       .when('/:id', {
         templateUrl: 'views/show.html',
