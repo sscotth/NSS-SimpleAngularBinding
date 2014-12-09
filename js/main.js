@@ -38,6 +38,19 @@
         });
       }
 
+
+      function getTodo(id, cb){
+        var url = 'https://omgttt.firebaseio.com/list/' + id + '.json';
+
+        $http.get(url)
+        .success(function(data){
+          cb(data);
+        })
+        .error(function(err){
+          console.log(err);
+        });
+      }
+
       return {
         showTodo: showTodo
       };
@@ -53,12 +66,9 @@
       var vm = this;
       var id = $routeParams.id;
       var url = 'https://omgttt.firebaseio.com/list/' + id + '.json'
-      $http.get(url)
-      .success(function(data){
+
+      todoFactory.getTodo(id, function(data){
         vm.newTask = data;
-      })
-      .error(function(err){
-        console.log(err);
       });
 
       vm.addNewTask = function(){
