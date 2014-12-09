@@ -26,16 +26,28 @@
       })
       .otherwise({redirectTo: '/'});
     })
-    .controller('ShowController', function($http, $routeParams){
-      var vm = this;
-      var id = $routeParams.id;
-      $http.get('https://omgttt.firebaseio.com/list/' + id + '.json')
+    .factory('todoFactory', function($http){
+
+      function showTodo(id, cb){
+        $http.get('https://omgttt.firebaseio.com/list/' + id + '.json')
         .success(function(data){
-          vm.task = data;
+          cb(data);
         })
         .error(function(err){
           console.log(err);
         });
+      }
+
+      return {
+        showTodo: showTodo
+      };
+    })
+    .controller('ShowController', function($routeParams, todoFactory){
+      var vm = this;
+      var id = $routeParams.id;
+      todoFactory.showTodo(id, function(data){
+        vm.task = data;
+      });
     })
     .controller('EditController', function($http, $routeParams, $location){
       var vm = this;
