@@ -28,17 +28,6 @@
     })
     .factory('todoFactory', function($http){
 
-      function showTodo(id, cb){
-        $http.get('https://omgttt.firebaseio.com/list/' + id + '.json')
-        .success(function(data){
-          cb(data);
-        })
-        .error(function(err){
-          console.log(err);
-        });
-      }
-
-
       function getTodo(id, cb){
         var url = 'https://omgttt.firebaseio.com/list/' + id + '.json';
 
@@ -52,7 +41,6 @@
       }
 
       return {
-        showTodo: showTodo,
         getTodo: getTodo
       };
     })
