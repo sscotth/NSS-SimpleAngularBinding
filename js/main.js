@@ -19,6 +19,11 @@
         controller: 'ShowController',
         controllerAs: 'show'
       })
+      .when('/:id/edit', {
+        templateUrl: 'views/form.html',
+        controller: 'EditController',
+        controllerAs: 'todo'
+      })
       .otherwise({redirectTo: '/'});
     })
     .controller('ShowController', function($http, $routeParams){
@@ -31,6 +36,37 @@
         .error(function(err){
           console.log(err);
         });
+    })
+    .controller('EditController', function($http, $routeParams, $location){
+      var vm = this;
+      var id = $routeParams.id;
+      var url = 'https://omgttt.firebaseio.com/list/' + id + '.json'
+      $http.get(url)
+      .success(function(data){
+        vm.newTask = data;
+      })
+      .error(function(err){
+        console.log(err);
+      });
+
+      vm.addNewTask = function(){
+        $http.put(url, vm.newTask)
+          .success(function(data){
+            $location.path('/')
+          })
+          .error(function(err){
+            console.log(err);
+          });
+      };
+
+
+      vm.priorityOptions = {
+        high: 'High',
+        medium: 'Medium',
+        low: 'Low',
+        whocares: 'Whatev'
+      };
+
     })
     .controller('TodoController', function($http){
       var vm = this;
