@@ -26,7 +26,7 @@
       })
       .otherwise({redirectTo: '/'});
     })
-    .factory('todoFactory', function($http){
+    .factory('todoFactory', function($http, $location){
 
       function getTodo(id, cb){
         var url = 'https://omgttt.firebaseio.com/list/' + id + '.json';
@@ -40,8 +40,21 @@
         });
       }
 
+      function editTodo(id, todo){
+        var url = 'https://omgttt.firebaseio.com/list/' + id + '.json';
+        $http.put(url, todo)
+          .success(function(data){
+            $location.path('/')
+          })
+          .error(function(err){
+            console.log(err);
+          });
+        };
+
+
       return {
-        getTodo: getTodo
+        getTodo: getTodo,
+        editTodo: editTodo
       };
     })
     .controller('ShowController', function($routeParams, todoFactory){
@@ -54,22 +67,14 @@
     .controller('EditController', function($http, $routeParams, $location, todoFactory){
       var vm = this;
       var id = $routeParams.id;
-      var url = 'https://omgttt.firebaseio.com/list/' + id + '.json'
 
       todoFactory.getTodo(id, function(data){
         vm.newTask = data;
       });
 
       vm.addNewTask = function(){
-        $http.put(url, vm.newTask)
-          .success(function(data){
-            $location.path('/')
-          })
-          .error(function(err){
-            console.log(err);
-          });
+        todoFactory.editTodo(id, vm.newTask)
       };
-
 
       vm.priorityOptions = {
         high: 'High',
