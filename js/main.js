@@ -82,12 +82,20 @@
           });
         }
 
+      var priorityOptions = {
+          high: 'High',
+          medium: 'Medium',
+          low: 'Low',
+          whocares: 'Whatev'
+      };
+
       return {
         getTodo: getTodo,
         editTodo: editTodo,
         getAllTodos: getAllTodos,
         createTodo: createTodo,
-        deleteTodo: deleteTodo
+        deleteTodo: deleteTodo,
+        priorityOptions: priorityOptions
       };
     })
     .controller('ShowController', function($routeParams, todoFactory){
@@ -109,12 +117,7 @@
         todoFactory.editTodo(id, vm.newTask)
       };
 
-      vm.priorityOptions = {
-        high: 'High',
-        medium: 'Medium',
-        low: 'Low',
-        whocares: 'Whatev'
-      };
+      vm.priorityOptions = todoFactory.priorityOptions;
 
     })
     .controller('TodoController', function($http, todoFactory){
@@ -139,12 +142,7 @@
 
       vm.newTask = _freshTask();
 
-      vm.priorityOptions = {
-        high: 'High',
-        medium: 'Medium',
-        low: 'Low',
-        whocares: 'Whatev'
-      };
+      vm.priorityOptions = todoFactory.priorityOptions;
 
       function _freshTask(){
         return {
