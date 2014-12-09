@@ -64,7 +64,7 @@
         vm.task = data;
       });
     })
-    .controller('EditController', function($http, $routeParams, $location, todoFactory){
+    .controller('EditController', function($routeParams, todoFactory){
       var vm = this;
       var id = $routeParams.id;
 
