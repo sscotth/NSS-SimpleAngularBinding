@@ -9,7 +9,7 @@
   </div>
   <div class="form-group" ng-class="{'has-error': !todo.newTask.due}">
     <label class="control-label">Due Date</label>
-    <input class="form-control" type="date" ng-model="todo.newTask.due" required>
+    <input class="form-control" type="text" ng-model="todo.newTask.due" bs-datepicker required>
   </div>
   <div class="form-group">
     <label class="control-label">Priority</label>

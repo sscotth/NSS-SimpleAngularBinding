@@ -1,7 +1,7 @@
 ;(function(){
   'use strict';
 
-  angular.module('todoApp', ['ngRoute'])
+  angular.module('todoApp', ['ngRoute', 'mgcrea.ngStrap'])
     .config(function($routeProvider){
       $routeProvider
       .when('/', {
