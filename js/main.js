@@ -52,17 +52,18 @@
       }
 
       return {
-        showTodo: showTodo
+        showTodo: showTodo,
+        getTodo: getTodo
       };
     })
     .controller('ShowController', function($routeParams, todoFactory){
       var vm = this;
       var id = $routeParams.id;
-      todoFactory.showTodo(id, function(data){
+      todoFactory.getTodo(id, function(data){
         vm.task = data;
       });
     })
-    .controller('EditController', function($http, $routeParams, $location){
+    .controller('EditController', function($http, $routeParams, $location, todoFactory){
       var vm = this;
       var id = $routeParams.id;
       var url = 'https://omgttt.firebaseio.com/list/' + id + '.json'
