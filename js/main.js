@@ -51,10 +51,21 @@
           });
         };
 
+        function getAllTodos(cb){
+          $http.get('https://omgttt.firebaseio.com/list.json')
+          .success(function(data){
+            cb(data);
+          })
+          .error(function(err){
+            console.log(err);
+          });
+        }
+
 
       return {
         getTodo: getTodo,
-        editTodo: editTodo
+        editTodo: editTodo,
+        getAllTodos: getAllTodos
       };
     })
     .controller('ShowController', function($routeParams, todoFactory){
@@ -84,16 +95,12 @@
       };
 
     })
-    .controller('TodoController', function($http){
+    .controller('TodoController', function($http, todoFactory){
       var vm = this;
 
-      $http.get('https://omgttt.firebaseio.com/list.json')
-        .success(function(data){
-           vm.tasks = data;
-        })
-        .error(function(err){
-          console.log(err);
-        });
+      todoFactory.getAllTodos(function(data){
+        vm.tasks = data;
+      });
 
       vm.addNewTask = function(){
         $http.post('https://omgttt.firebaseio.com/list.json', vm.newTask)
