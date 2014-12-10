@@ -4,27 +4,27 @@
   angular.module('todoApp', ['ngRoute', 'mgcrea.ngStrap'])
     .config(function($routeProvider){
       $routeProvider
-      .when('/', {
-        templateUrl: 'views/table.html',
-        controller: 'TodoController',
-        controllerAs: 'todo'
-      })
-      .when('/new', {
-        templateUrl: 'views/form.html',
-        controller: 'TodoController',
-        controllerAs: 'todo'
-      })
-      .when('/:id', {
-        templateUrl: 'views/show.html',
-        controller: 'ShowController',
-        controllerAs: 'show'
-      })
-      .when('/:id/edit', {
-        templateUrl: 'views/form.html',
-        controller: 'EditController',
-        controllerAs: 'todo'
-      })
-      .otherwise({redirectTo: '/'});
+        .when('/', {
+          templateUrl: 'views/table.html',
+          controller: 'TodoController',
+          controllerAs: 'todo'
+        })
+        .when('/new', {
+          templateUrl: 'views/form.html',
+          controller: 'TodoController',
+          controllerAs: 'todo'
+        })
+        .when('/:id', {
+          templateUrl: 'views/show.html',
+          controller: 'ShowController',
+          controllerAs: 'show'
+        })
+        .when('/:id/edit', {
+          templateUrl: 'views/form.html',
+          controller: 'EditController',
+          controllerAs: 'todo'
+        })
+        .otherwise({redirectTo: '/'});
     })
     .factory('todoFactory', function($http, $location){
 
@@ -32,61 +32,61 @@
         var url = 'https://omgttt.firebaseio.com/list/' + id + '.json';
 
         $http.get(url)
-        .success(function(data){
-          cb(data);
-        })
-        .error(function(err){
-          console.log(err);
-        });
-      }
-
-      function editTodo(id, todo){
-        var url = 'https://omgttt.firebaseio.com/list/' + id + '.json';
-        $http.put(url, todo)
-          .success(function(data){
-            $location.path('/')
-          })
-          .error(function(err){
-            console.log(err);
-          });
-        };
-
-        function getAllTodos(cb){
-          $http.get('https://omgttt.firebaseio.com/list.json')
           .success(function(data){
             cb(data);
           })
           .error(function(err){
             console.log(err);
           });
-        }
+      }
 
-        function createTodo(task, cb){
-          $http.post('https://omgttt.firebaseio.com/list.json', task)
+      function editTodo(id, todo){
+        var url = 'https://omgttt.firebaseio.com/list/' + id + '.json';
+        $http.put(url, todo)
           .success(function(data){
-            cb(data)
+            $location.path('/');
           })
           .error(function(err){
             console.log(err);
           });
-        }
+      }
 
-        function deleteTodo(todoId, cb){
-          var url = 'https://omgttt.firebaseio.com/list/' + todoId + '.json';
-          $http.delete(url)
-          .success(function(){
-            cb()
+      function getAllTodos(cb){
+        $http.get('https://omgttt.firebaseio.com/list.json')
+          .success(function(data){
+            cb(data);
           })
           .error(function(err){
             console.log(err);
           });
-        }
+      }
+
+      function createTodo(task, cb){
+        $http.post('https://omgttt.firebaseio.com/list.json', task)
+          .success(function(data){
+            cb(data);
+          })
+          .error(function(err){
+            console.log(err);
+          });
+      }
+
+      function deleteTodo(todoId, cb){
+        var url = 'https://omgttt.firebaseio.com/list/' + todoId + '.json';
+        $http.delete(url)
+          .success(function(){
+            cb();
+          })
+          .error(function(err){
+            console.log(err);
+          });
+      }
 
       var priorityOptions = {
-          high: 'High',
-          medium: 'Medium',
-          low: 'Low',
-          whocares: 'Whatev'
+        high: 'High',
+        medium: 'Medium',
+        low: 'Low',
+        whocares: 'Whatev'
       };
 
       return {
@@ -114,7 +114,7 @@
       });
 
       vm.addNewTask = function(){
-        todoFactory.editTodo(id, vm.newTask)
+        todoFactory.editTodo(id, vm.newTask);
       };
 
       vm.priorityOptions = todoFactory.priorityOptions;
@@ -137,7 +137,7 @@
       vm.removeTodo = function(todoId){
         todoFactory.deleteTodo(todoId, function(){
           delete vm.tasks[todoId];
-        })
+        });
       };
 
       vm.newTask = _freshTask();
@@ -147,9 +147,9 @@
       function _freshTask(){
         return {
           priority: 'low'
-        }
+        };
       }
 
-    });
+  });
 
 }());
