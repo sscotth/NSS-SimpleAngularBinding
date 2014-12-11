@@ -13,11 +13,11 @@
           password : vm.password
         }, function(error, authData) {
           if (error === null) {
-            console.log("User logged in successfully", authData);
+            console.log('User logged in successfully', authData);
             $location.path('/');
             $scope.$apply();
           } else {
-            console.log("Error logging in user:", error);
+            console.log('Error logging in user:', error);
           }
         });
       }
@@ -30,9 +30,9 @@
           password : vm.password
         }, function(error, authData) {
           if (error === null) {
-            console.log("User created successfully", authData);
+            console.log('User created successfully', authData);
           } else {
-            console.log("Error creating user:", error);
+            console.log('Error creating user:', error);
           }
         });
       }
