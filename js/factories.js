@@ -4,10 +4,17 @@
   angular.module('todoApp')
     .factory('todoFactory', function(FIREBASE_URL, $http, $location){
 
-      function getTodo(id, cb){
-        var url = FIREBASE_URL + '/list/' + id + '.json';
+      function _todosUrl(id){
+        if (id) {
+          return FIREBASE_URL + '/list/' + id + '.json';
+        } else {
+          return FIREBASE_URL + '/list.json';
+        }
 
-        $http.get(url)
+      }
+
+      function getTodo(id, cb){
+        $http.get(_todosUrl(id))
         .success(function(data){
           cb(data);
         })
@@ -17,8 +24,7 @@
       }
 
       function editTodo(id, todo){
-        var url = FIREBASE_URL + '/list/' + id + '.json';
-        $http.put(url, todo)
+        $http.put(_todosUrl(id), todo)
         .success(function(data){
           $location.path('/');
         })
@@ -28,7 +34,7 @@
       }
 
       function getAllTodos(cb){
-        $http.get(FIREBASE_URL + '/list.json')
+        $http.get(_todosUrl())
         .success(function(data){
           cb(data);
         })
@@ -38,7 +44,7 @@
       }
 
       function createTodo(task, cb){
-        $http.post(FIREBASE_URL + '/list.json', task)
+        $http.post(_todosUrl(), task)
         .success(function(data){
           cb(data);
         })
@@ -48,8 +54,7 @@
       }
 
       function deleteTodo(todoId, cb){
-        var url = FIREBASE_URL + '/list/' + todoId + '.json';
-        $http.delete(url)
+        $http.delete(_todosUrl(todoId))
         .success(function(){
           cb();
         })
