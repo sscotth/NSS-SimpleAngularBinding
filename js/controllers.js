@@ -22,6 +22,21 @@
         });
       }
 
+      vm.register = function(){
+        var ref = new Firebase('https://omgttt.firebaseio.com')
+
+        ref.createUser({
+          email    : vm.email,
+          password : vm.password
+        }, function(error, authData) {
+          if (error === null) {
+            console.log("User created successfully", authData);
+          } else {
+            console.log("Error creating user:", error);
+          }
+        });
+      }
+
     })
     .controller('ShowController', function($routeParams, todoFactory){
       var vm = this;
