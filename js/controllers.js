@@ -2,7 +2,25 @@
   'use strict';
 
   angular.module('todoApp')
-    .controller('LoginController', function(){})
+    .controller('LoginController', function(){
+      var vm = this;
+
+      vm.login = function(){
+        var ref = new Firebase('https://omgttt.firebaseio.com')
+
+        ref.authWithPassword({
+          email    : vm.email,
+          password : vm.password
+        }, function(error, authData) {
+          if (error === null) {
+            console.log("User logged in successfully", authData);
+          } else {
+            console.log("Error creating user:", error);
+          }
+        });
+      }
+
+    })
     .controller('ShowController', function($routeParams, todoFactory){
       var vm = this;
       var id = $routeParams.id;
