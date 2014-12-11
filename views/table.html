@@ -16,8 +16,8 @@
       <td>{{task.due | date}}</td>
       <td>{{task.priority}}</td>
       <td>
-        <a class="btn btn-primary" href="/#/{{taskId}}">Show</a>
-        <a class="btn btn-primary" href="/#/{{taskId}}/edit">Edit</a>
+        <a class="btn btn-primary" href="/#/todos/{{taskId}}">Show</a>
+        <a class="btn btn-primary" href="/#/todos/{{taskId}}/edit">Edit</a>
         <button ng-click="todo.removeTodo(taskId)">Delete</button>
       </td>
     </tr>
