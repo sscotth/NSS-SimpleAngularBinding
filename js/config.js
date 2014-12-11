@@ -12,6 +12,10 @@
         controller: 'LoginController',
         controllerAs: 'login'
       })
+      .when('/logout', {
+        template: '',
+        controller: 'LogoutController'
+      })
       .when('/todos', {
         templateUrl: 'views/table.html',
         controller: 'TodoController',

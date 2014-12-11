@@ -52,6 +52,14 @@
         });
       };
     })
+    .controller('LogoutController', function($scope, $location){
+      var ref = new Firebase('https://omgttt.firebaseio.com');
+
+      ref.unauth(function(){
+        $location.path('/');
+        $scope.$apply();
+      });
+    })
     .controller('ShowController', function($routeParams, todoFactory){
       var vm = this;
       var id = $routeParams.id;
