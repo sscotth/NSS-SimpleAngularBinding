@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('todoApp')
-    .constant('FIREBASE_URL', 'https://omgttt.firebaseio.com')
     .factory('todoFactory', function(FIREBASE_URL, $http, $location){
 
       function getTodo(id, cb){
