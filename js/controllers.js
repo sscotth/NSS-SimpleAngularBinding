@@ -21,6 +21,12 @@
         );
       };
 
+      factory.logout = function(cb){
+        ref.unauth(function(){
+          cb();
+        });
+      };
+
       return factory;
     })
     .controller('LoginController', function(authFactory, $scope, $location){
@@ -63,10 +69,8 @@
         });
       };
     })
-    .controller('LogoutController', function($scope, $location){
-      var ref = new Firebase('https://omgttt.firebaseio.com');
-
-      ref.unauth(function(){
+    .controller('LogoutController', function($scope, $location, authFactory){
+      authFactory.logout(function(){
         $location.path('/');
         $scope.$apply();
       });
