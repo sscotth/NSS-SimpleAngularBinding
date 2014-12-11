@@ -42,6 +42,19 @@
         );
       };
 
+      factory.resetPassword = function(email){
+        ref.resetPassword({
+            email : email
+          }, function(error) {
+            if (error === null) {
+              console.log('Password reset email sent successfully');
+            } else {
+              console.log('Error sending password reset email:', error);
+            }
+          }
+        );
+      };
+
       return factory;
     })
     .controller('LoginController', function(authFactory, $scope, $location){
@@ -61,17 +74,7 @@
       };
 
       vm.forgotPassword = function(){
-        var ref = new Firebase('https://omgttt.firebaseio.com');
-
-        ref.resetPassword({
-            email : vm.email
-          }, function(error) {
-          if (error === null) {
-            console.log("Password reset email sent successfully");
-          } else {
-            console.log("Error sending password reset email:", error);
-          }
-        });
+        authFactory.resetPassword(vm.email);
       };
     })
     .controller('LogoutController', function($scope, $location, authFactory){
