@@ -27,6 +27,21 @@
         });
       };
 
+      factory.register = function(email, pass, cb){
+        ref.createUser({
+            email    : email,
+            password : pass
+          }, function(error, authData) {
+            if (error === null) {
+              console.log('User created successfully', authData);
+              cb();
+            } else {
+              console.log('Error creating user:', error);
+            }
+          }
+        );
+      };
+
       return factory;
     })
     .controller('LoginController', function(authFactory, $scope, $location){
@@ -40,20 +55,10 @@
       };
 
       vm.register = function(){
-        var ref = new Firebase('https://omgttt.firebaseio.com')
-
-        ref.createUser({
-          email    : vm.email,
-          password : vm.password
-        }, function(error, authData) {
-          if (error === null) {
-            console.log('User created successfully', authData);
-            vm.login();
-          } else {
-            console.log('Error creating user:', error);
-          }
+        authFactory.register(vm.email, vm.password, function(){
+          vm.login();
         });
-      }
+      };
 
       vm.forgotPassword = function(){
         var ref = new Firebase('https://omgttt.firebaseio.com');
