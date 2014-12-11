@@ -2,10 +2,11 @@
   'use strict';
 
   angular.module('todoApp')
-    .factory('todoFactory', function($http, $location){
+    .constant('FIREBASE_URL', 'https://omgttt.firebaseio.com')
+    .factory('todoFactory', function(FIREBASE_URL, $http, $location){
 
       function getTodo(id, cb){
-        var url = 'https://omgttt.firebaseio.com/list/' + id + '.json';
+        var url = FIREBASE_URL + '/list/' + id + '.json';
 
         $http.get(url)
         .success(function(data){
@@ -17,7 +18,7 @@
       }
 
       function editTodo(id, todo){
-        var url = 'https://omgttt.firebaseio.com/list/' + id + '.json';
+        var url = FIREBASE_URL + '/list/' + id + '.json';
         $http.put(url, todo)
         .success(function(data){
           $location.path('/');
@@ -28,7 +29,7 @@
       }
 
       function getAllTodos(cb){
-        $http.get('https://omgttt.firebaseio.com/list.json')
+        $http.get(FIREBASE_URL + '/list.json')
         .success(function(data){
           cb(data);
         })
@@ -38,7 +39,7 @@
       }
 
       function createTodo(task, cb){
-        $http.post('https://omgttt.firebaseio.com/list.json', task)
+        $http.post(FIREBASE_URL + '/list.json', task)
         .success(function(data){
           cb(data);
         })
@@ -48,7 +49,7 @@
       }
 
       function deleteTodo(todoId, cb){
-        var url = 'https://omgttt.firebaseio.com/list/' + todoId + '.json';
+        var url = FIREBASE_URL + '/list/' + todoId + '.json';
         $http.delete(url)
         .success(function(){
           cb();
