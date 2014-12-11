@@ -31,6 +31,7 @@
         }, function(error, authData) {
           if (error === null) {
             console.log('User created successfully', authData);
+            vm.login();
           } else {
             console.log('Error creating user:', error);
           }
