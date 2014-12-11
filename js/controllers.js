@@ -17,7 +17,7 @@
             $location.path('/');
             $scope.$apply();
           } else {
-            console.log("Error creating user:", error);
+            console.log("Error logging in user:", error);
           }
         });
       }
