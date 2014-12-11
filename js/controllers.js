@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('todoApp')
-    .controller('LoginController', function(){
+    .controller('LoginController', function($scope, $location){
       var vm = this;
 
       vm.login = function(){
@@ -14,6 +14,8 @@
         }, function(error, authData) {
           if (error === null) {
             console.log("User logged in successfully", authData);
+            $location.path('/');
+            $scope.$apply();
           } else {
             console.log("Error creating user:", error);
           }
