@@ -2,6 +2,7 @@
   'use strict';
 
   angular.module('todoApp')
+    .controller('LoginController', function(){})
     .controller('ShowController', function($routeParams, todoFactory){
       var vm = this;
       var id = $routeParams.id;
