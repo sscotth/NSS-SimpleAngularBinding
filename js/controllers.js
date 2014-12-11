@@ -38,6 +38,19 @@
         });
       }
 
+      vm.forgotPassword = function(){
+        var ref = new Firebase('https://omgttt.firebaseio.com');
+
+        ref.resetPassword({
+            email : vm.email
+          }, function(error) {
+          if (error === null) {
+            console.log("Password reset email sent successfully");
+          } else {
+            console.log("Error sending password reset email:", error);
+          }
+        });
+      };
     })
     .controller('ShowController', function($routeParams, todoFactory){
       var vm = this;
