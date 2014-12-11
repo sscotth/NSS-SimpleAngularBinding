@@ -2,25 +2,36 @@
   'use strict';
 
   angular.module('todoApp')
-    .controller('LoginController', function($scope, $location){
+    .factory('authFactory', function(FIREBASE_URL){
+      var factory = {},
+          ref = new Firebase(FIREBASE_URL);
+
+      factory.login = function(email, pass, cb){
+        ref.authWithPassword({
+            email    : email,
+            password : pass
+          }, function(error, authData) {
+            if (error === null) {
+              console.log('User logged in successfully', authData);
+              cb();
+            } else {
+              console.log('Error logging in user:', error);
+            }
+          }
+        );
+      };
+
+      return factory;
+    })
+    .controller('LoginController', function(authFactory, $scope, $location){
       var vm = this;
 
       vm.login = function(){
-        var ref = new Firebase('https://omgttt.firebaseio.com')
-
-        ref.authWithPassword({
-          email    : vm.email,
-          password : vm.password
-        }, function(error, authData) {
-          if (error === null) {
-            console.log('User logged in successfully', authData);
-            $location.path('/');
-            $scope.$apply();
-          } else {
-            console.log('Error logging in user:', error);
-          }
+        authFactory.login(vm.email, vm.password, function(){
+          $location.path('/');
+          $scope.$apply();
         });
-      }
+      };
 
       vm.register = function(){
         var ref = new Firebase('https://omgttt.firebaseio.com')
