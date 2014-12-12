@@ -2,9 +2,11 @@
   'use strict';
 
   angular.module('todoApp')
-    .factory('authFactory', function($location, FIREBASE_URL){
+    .factory('authFactory', function($rootScope, $location, FIREBASE_URL){
       var factory = {},
           ref = new Firebase(FIREBASE_URL);
+
+      $rootScope.user = ref.getAuth();
 
       factory.requireLogin = function(){
         if (!_isLoggedIn()) {
@@ -51,6 +53,7 @@
           }, function(error, authData) {
             if (error === null) {
               console.log('User logged in successfully', authData);
+              $rootScope.user = authData;
               cb();
             } else {
               console.log('Error logging in user:', error);
@@ -61,6 +64,7 @@
 
       factory.logout = function(cb){
         ref.unauth(function(){
+          $rootScope.user = null;
           cb();
         });
       };
