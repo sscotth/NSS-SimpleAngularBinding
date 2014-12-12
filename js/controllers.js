@@ -99,7 +99,7 @@
       var vm = this;
       vm.changePassword = function(){
         authFactory.changePassword(vm.oldPassword, vm.newPassword, function(){
-          $location.path('/todos');
+          $location.path('/logout');
           $scope.$apply();
         })
       };
@@ -109,7 +109,7 @@
 
       vm.login = function(){
         authFactory.login(vm.email, vm.password, function(){
-          $location.path('/');
+          $location.path('/todos');
           $scope.$apply();
         });
       };
@@ -126,7 +126,7 @@
     })
     .controller('LogoutController', function($scope, $location, authFactory){
       authFactory.logout(function(){
-        $location.path('/');
+        $location.path('/login');
         $scope.$apply();
       });
     })
