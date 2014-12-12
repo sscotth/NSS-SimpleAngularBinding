@@ -6,6 +6,22 @@
       var factory = {},
           ref = new Firebase(FIREBASE_URL);
 
+      factory.changePassword = function(oldPass, newPass, cb){
+        ref.changePassword({
+            email       : ref.getAuth().password.email,
+            oldPassword : oldPass,
+            newPassword : newPass,
+          }, function(error) {
+            if (error === null) {
+              console.log('Password changed successfully');
+              cb();
+            } else {
+              console.log('Error changing password:', error);
+            }
+          }
+        );
+      };
+
       factory.login = function(email, pass, cb){
         ref.authWithPassword({
             email    : email,
@@ -56,6 +72,16 @@
       };
 
       return factory;
+    })
+    .controller('ChangePasswordController', function($scope, $location, authFactory){
+      var vm = this;
+
+      vm.changePassword = function(){
+        authFactory.changePassword(vm.oldPassword, vm.newPassword, function(){
+          $location.path('/todos');
+          $scope.$apply();
+        })
+      };
     })
     .controller('LoginController', function(authFactory, $scope, $location){
       var vm = this;
