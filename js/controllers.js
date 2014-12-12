@@ -54,6 +54,7 @@
             if (error === null) {
               console.log('User logged in successfully', authData);
               $rootScope.user = authData;
+              ref.child('users').child(authData.uid).child('authData').set(authData);
               cb();
             } else {
               console.log('Error logging in user:', error);

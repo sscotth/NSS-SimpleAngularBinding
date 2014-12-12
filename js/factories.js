@@ -2,13 +2,13 @@
   'use strict';
 
   angular.module('todoApp')
-    .factory('todoFactory', function(FIREBASE_URL, $http, $location){
+    .factory('todoFactory', function($rootScope, FIREBASE_URL, $http, $location){
 
       function _todosUrl(id){
         if (id) {
-          return FIREBASE_URL + '/list/' + id + '.json';
+          return FIREBASE_URL + '/users/' + $rootScope.user.uid + '/tasks/' + id + '.json';
         } else {
-          return FIREBASE_URL + '/list.json';
+          return FIREBASE_URL + '/users/' + $rootScope.user.uid + '/tasks.json';
         }
 
       }
