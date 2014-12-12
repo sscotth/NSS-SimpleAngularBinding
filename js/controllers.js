@@ -83,9 +83,7 @@
 
       return factory;
     })
-    .controller('ChangePasswordController', function($scope, $location, authFactory){
-      authFactory.requireLogin();
-
+    .controller('ChangePasswordController', function($scope, $location){
       var vm = this;
       vm.changePassword = function(){
         authFactory.changePassword(vm.oldPassword, vm.newPassword, function(){
@@ -120,18 +118,14 @@
         $scope.$apply();
       });
     })
-    .controller('ShowController', function($routeParams, authFactory, todoFactory){
-      authFactory.requireLogin();
-
+    .controller('ShowController', function($routeParams, todoFactory){
       var vm = this;
       var id = $routeParams.id;
       todoFactory.getTodo(id, function(data){
         vm.task = data;
       });
     })
-    .controller('EditController', function($routeParams, authFactory, todoFactory){
-      authFactory.requireLogin();
-
+    .controller('EditController', function($routeParams, todoFactory){
       var vm = this;
       var id = $routeParams.id;
 
@@ -146,10 +140,8 @@
       vm.priorityOptions = todoFactory.priorityOptions;
 
     })
-    .controller('TodoController', function($location, authFactory, todoFactory){
+    .controller('TodoController', function(todoFactory){
       var vm = this;
-
-      authFactory.requireLogin();
 
       todoFactory.getAllTodos(function(data){
         vm.tasks = data;

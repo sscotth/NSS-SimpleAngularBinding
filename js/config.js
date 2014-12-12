@@ -19,27 +19,52 @@
       .when('/changepassword', {
         templateUrl: 'views/changepassword.html',
         controller: 'ChangePasswordController',
-        controllerAs: 'changepw'
+        controllerAs: 'changepw',
+        resolve: {
+          data: function(authFactory){
+            authFactory.requireLogin();
+          }
+        }
       })
       .when('/todos', {
         templateUrl: 'views/table.html',
         controller: 'TodoController',
-        controllerAs: 'todo'
+        controllerAs: 'todo',
+        resolve: {
+          data: function(authFactory){
+            authFactory.requireLogin();
+          }
+        }
       })
       .when('/todos/new', {
         templateUrl: 'views/form.html',
         controller: 'TodoController',
-        controllerAs: 'todo'
+        controllerAs: 'todo',
+        resolve: {
+          data: function(authFactory){
+            authFactory.requireLogin();
+          }
+        }
       })
       .when('/todos/:id', {
         templateUrl: 'views/show.html',
         controller: 'ShowController',
-        controllerAs: 'show'
+        controllerAs: 'show',
+        resolve: {
+          data: function(authFactory){
+            authFactory.requireLogin();
+          }
+        }
       })
       .when('/todos/:id/edit', {
         templateUrl: 'views/form.html',
         controller: 'EditController',
-        controllerAs: 'todo'
+        controllerAs: 'todo',
+        resolve: {
+          data: function(authFactory){
+            authFactory.requireLogin();
+          }
+        }
       })
       .otherwise({redirectTo: '/'});
     })
