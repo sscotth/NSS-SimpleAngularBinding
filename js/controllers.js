@@ -2,11 +2,17 @@
   'use strict';
 
   angular.module('todoApp')
-    .factory('authFactory', function(FIREBASE_URL){
+    .factory('authFactory', function($location, FIREBASE_URL){
       var factory = {},
           ref = new Firebase(FIREBASE_URL);
 
-      factory.isLoggedIn = function(){
+      factory.requireLogin = function(){
+        if (!_isLoggedIn()) {
+          $location.path('/login');
+        }
+      };
+
+      function _isLoggedIn(){
         return Boolean(ref.getAuth());
       }
 
@@ -78,8 +84,9 @@
       return factory;
     })
     .controller('ChangePasswordController', function($scope, $location, authFactory){
-      var vm = this;
+      authFactory.requireLogin();
 
+      var vm = this;
       vm.changePassword = function(){
         authFactory.changePassword(vm.oldPassword, vm.newPassword, function(){
           $location.path('/todos');
@@ -113,14 +120,18 @@
         $scope.$apply();
       });
     })
-    .controller('ShowController', function($routeParams, todoFactory){
+    .controller('ShowController', function($routeParams, authFactory, todoFactory){
+      authFactory.requireLogin();
+
       var vm = this;
       var id = $routeParams.id;
       todoFactory.getTodo(id, function(data){
         vm.task = data;
       });
     })
-    .controller('EditController', function($routeParams, todoFactory){
+    .controller('EditController', function($routeParams, authFactory, todoFactory){
+      authFactory.requireLogin();
+
       var vm = this;
       var id = $routeParams.id;
 
@@ -138,9 +149,7 @@
     .controller('TodoController', function($location, authFactory, todoFactory){
       var vm = this;
 
-      if (!authFactory.isLoggedIn()) {
-        $location.path('/login')
-      }
+      authFactory.requireLogin();
 
       todoFactory.getAllTodos(function(data){
         vm.tasks = data;
