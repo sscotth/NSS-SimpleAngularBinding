@@ -165,6 +165,7 @@
 
       vm.addNewTask = function(){
         todoFactory.createTodo(vm.newTask, function(data){
+          vm.tasks = vm.tasks || {};
           vm.tasks[data.name] = vm.newTask;
           vm.newTask = _freshTask();
         });
