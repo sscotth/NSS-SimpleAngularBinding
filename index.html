@@ -12,9 +12,10 @@
   <div class="container">
     <h1 ng-show="user">{{user.password.email}}'s Todos</h1>
     <h1 ng-hide="user">Todo App</h1>
-    <a class="btn btn-primary" href="/#/todos">All Todos</a>
-    <a class="btn btn-primary" href="/#/todos/new">New Todo</a>
+    <a class="btn btn-primary" href="/#/todos" ng-show="user">All Todos</a>
+    <a class="btn btn-primary" href="/#/todos/new" ng-show="user">New Todo</a>
     <a class="btn btn-success" href="/#/login" ng-hide="user">Login</a>
+    <a class="btn btn-warning" href="/#/changepassword" ng-show="user">Change Password</a>
     <a class="btn btn-danger" href="/#/logout" ng-show="user">Logout</a>
     <div ng-view></div>
   </div>
