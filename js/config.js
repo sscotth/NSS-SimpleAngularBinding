@@ -20,52 +20,39 @@
         templateUrl: 'views/changepassword.html',
         controller: 'ChangePasswordController',
         controllerAs: 'changepw',
-        resolve: {
-          data: function(authFactory){
-            authFactory.requireLogin();
-          }
-        }
+        private: true
       })
       .when('/todos', {
         templateUrl: 'views/table.html',
         controller: 'TodoController',
         controllerAs: 'todo',
-        resolve: {
-          data: function(authFactory){
-            authFactory.requireLogin();
-          }
-        }
+        private: true
       })
       .when('/todos/new', {
         templateUrl: 'views/form.html',
         controller: 'TodoController',
         controllerAs: 'todo',
-        resolve: {
-          data: function(authFactory){
-            authFactory.requireLogin();
-          }
-        }
+        private: true
       })
       .when('/todos/:id', {
         templateUrl: 'views/show.html',
         controller: 'ShowController',
         controllerAs: 'show',
-        resolve: {
-          data: function(authFactory){
-            authFactory.requireLogin();
-          }
-        }
+        private: true
       })
       .when('/todos/:id/edit', {
         templateUrl: 'views/form.html',
         controller: 'EditController',
         controllerAs: 'todo',
-        resolve: {
-          data: function(authFactory){
-            authFactory.requireLogin();
-          }
-        }
+        private: true
       })
       .otherwise({redirectTo: '/'});
+    })
+    .run(function($rootScope, authFactory){
+      $rootScope.$on('$routeChangeStart', function(event, nextRoute, priorRoute){
+        if (nextRoute.$$route.private) {
+          authFactory.requireLogin();
+        }
+      })
     })
 }());
