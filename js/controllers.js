@@ -6,6 +6,10 @@
       var factory = {},
           ref = new Firebase(FIREBASE_URL);
 
+      factory.isLoggedIn = function(){
+        return Boolean(ref.getAuth());
+      }
+
       factory.changePassword = function(oldPass, newPass, cb){
         ref.changePassword({
             email       : ref.getAuth().password.email,
@@ -131,8 +135,12 @@
       vm.priorityOptions = todoFactory.priorityOptions;
 
     })
-    .controller('TodoController', function($http, todoFactory){
+    .controller('TodoController', function($location, authFactory, todoFactory){
       var vm = this;
+
+      if (!authFactory.isLoggedIn()) {
+        $location.path('/login')
+      }
 
       todoFactory.getAllTodos(function(data){
         vm.tasks = data;
