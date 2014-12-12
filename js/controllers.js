@@ -12,6 +12,12 @@
         }
       };
 
+      factory.disallowLogin = function(){
+        if (_isLoggedIn()) {
+          $location.path('/todos');
+        }
+      };
+
       function _isLoggedIn(){
         return Boolean(ref.getAuth());
       }

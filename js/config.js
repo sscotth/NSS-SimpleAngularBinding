@@ -10,7 +10,12 @@
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginController',
-        controllerAs: 'login'
+        controllerAs: 'login',
+        resolve: {
+          data: function(authFactory){
+            authFactory.disallowLogin();
+          }
+        }
       })
       .when('/logout', {
         template: '',
