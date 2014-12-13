@@ -6,9 +6,11 @@
 
       function _todosUrl(id){
         if (id) {
-          return FIREBASE_URL + '/users/' + $rootScope.user.uid + '/tasks/' + id + '.json';
+          return FIREBASE_URL + '/users/' + $rootScope.user.uid +
+            '/tasks/' + id + '.json?auth=' + $rootScope.user.token;
         } else {
-          return FIREBASE_URL + '/users/' + $rootScope.user.uid + '/tasks.json';
+          return FIREBASE_URL + '/users/' + $rootScope.user.uid +
+            '/tasks.json?auth=' + $rootScope.user.token;
         }
 
       }
