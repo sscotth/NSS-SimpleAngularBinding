@@ -1,0 +1,8 @@
+<form ng-submit="todo.uploadFiles()">
+  <input type="file"
+    ng-model="todo.files"
+    ng-file-select
+    ng-file-change="todo.fileSelected($event)"
+    accept="image/*">
+  <input type="submit" name="Upload">
+</form>

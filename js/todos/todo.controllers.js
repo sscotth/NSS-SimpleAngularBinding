@@ -2,6 +2,16 @@
   'use strict';
 
   angular.module('todoApp')
+    .controller('UploadController', function($upload){
+      var vm = this;
+      vm.fileSelected = function(event){
+        console.log(vm.files, event);
+      };
+
+      vm.uploadFiles = function(){
+        console.log(vm.files);
+      };
+    })
     .controller('ShowController', function($routeParams, todoFactory){
       var vm = this;
       var id = $routeParams.id;

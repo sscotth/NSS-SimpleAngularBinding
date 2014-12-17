@@ -28,5 +28,11 @@
         controllerAs: 'todo',
         private: true
       })
+      .when('/todos/:id/upload', {
+        templateUrl: 'views/upload.html',
+        controller: 'UploadController',
+        controllerAs: 'todo',
+        private: true
+      })
     })
 }());
