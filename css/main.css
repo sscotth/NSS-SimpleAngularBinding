@@ -1,3 +1,15 @@
 .todo-img {
   height: 20px;
 }
+
+.thumbnail {
+  float: left;
+  max-height: 160px;
+  max-width: 210px;
+  margin-right: 20px;
+}
+.thumbnail img {
+  margin: auto auto;
+  max-height: 150px;
+  max-width: 200px;
+}

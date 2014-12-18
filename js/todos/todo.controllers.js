@@ -2,15 +2,33 @@
   'use strict';
 
   angular.module('todoApp')
-    .controller('UploadController', function($upload){
+    .controller('UploadController', function($scope, $upload){
       var vm = this;
+
       vm.fileSelected = function(event){
-        console.log(vm.files, event);
+        _setThumbnail();
       };
 
       vm.uploadFiles = function(){
         console.log(vm.files);
       };
+
+      function _setThumbnail () {
+        _imageToBase64(vm.files[0], function(base64){
+          vm.files[0].dataUrl = base64;
+          $scope.$apply();
+        });
+      }
+
+      function _imageToBase64 (file, cb) {
+        if (file && file.type.indexOf('image') > -1) {
+          var fr = new FileReader();
+          fr.readAsDataURL(file);
+          fr.onload = function(e) {
+            cb(e.target.result);
+          }
+        }
+      }
     })
     .controller('ShowController', function($routeParams, todoFactory){
       var vm = this;

@@ -1,3 +1,7 @@
+<div class="thumbnail">
+  <img ng-hide="todo.files" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image">
+  <img ng-show="todo.files[0].dataUrl" ng-src="{{todo.files[0].dataUrl}}">
+</div>
 <form ng-submit="todo.uploadFiles()">
   <input type="file"
     ng-model="todo.files"
