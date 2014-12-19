@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/sscotth/NSS-SimpleAngularBinding/issues"
   },
-  "homepage": "https://github.com/sscotth/NSS-SimpleAngularBinding"
+  "homepage": "https://github.com/sscotth/NSS-SimpleAngularBinding",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "load-grunt-tasks": "^1.0.0"
+  }
 }
