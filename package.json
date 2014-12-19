@@ -1,0 +1,21 @@
+{
+  "name": "NSS-SimpleAngularBinding",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "s3-cli sync --delete-removed -P . s3://omgttt.sscotth.io/",
+    "server": "python -m SimpleHTTPServer"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sscotth/NSS-SimpleAngularBinding.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sscotth/NSS-SimpleAngularBinding/issues"
+  },
+  "homepage": "https://github.com/sscotth/NSS-SimpleAngularBinding"
+}
