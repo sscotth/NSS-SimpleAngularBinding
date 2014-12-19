@@ -19,5 +19,15 @@
       </option>
     </select>
   </div>
+  <div class="upload" ng-controller="UploadController as upload">
+    <div class="thumbnail">
+      <img ng-src="{{todo.files[0].dataUrl || upload.imageUrl}}" onerror="this.src='http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image'">
+    </div>
+    <input type="file"
+      ng-model="todo.files"
+      ng-file-select
+      ng-file-change="upload.fileSelected($files)"
+      accept="image/*">
+  </div>
   <input type="submit" value="Add Task" ng-disabled="myForm.$invalid">
 </form>
