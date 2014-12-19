@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="(taskId, task) in todo.tasks">
-      <td><img class="todo-img" ng-src="{{task.image}}"></td>
+      <td><img class="todo-img" ng-src="https://s3.amazonaws.com/omgttt-sscotth-io-images/{{user.uid}}/{{taskId}}.jpg"></td>
       <td>{{task.name}}</td>
       <td>{{task.desc}}</td>
       <td>{{task.due | date}}</td>

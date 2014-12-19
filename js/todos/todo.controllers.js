@@ -2,15 +2,32 @@
   'use strict';
 
   angular.module('todoApp')
-    .controller('UploadController', function($scope, $upload){
-      var vm = this;
+    .controller('UploadController', function($rootScope, $scope, $upload, $routeParams, $location){
+      var vm = this,
+          id = $routeParams.id;
 
       vm.fileSelected = function(event){
         _setThumbnail();
       };
 
       vm.uploadFiles = function(){
-        console.log(vm.files);
+        var file = vm.files[0];
+        $upload.upload({
+          url: 'https://omgttt-sscotth-io-images.s3.amazonaws.com',
+          method: 'POST',
+          data : {
+            'Content-Type' : file.type,
+            key: $rootScope.user.uid + '/' + id + '.jpg',
+            acl: 'public-read',
+            awsaccesskeyid: 'AKIAIGWKSR63NF7ZSRTA',
+            policy: 'eyJleHBpcmF0aW9uIjogIjIwMjAtMDEtMDFUMDA6MDA6MDBaIiwiY29uZGl0aW9ucyI6IFt7ImJ1Y2tldCI6ICJvbWd0dHQtc3Njb3R0aC1pby1pbWFnZXMifSx7ImFjbCI6ICJwdWJsaWMtcmVhZCJ9LFsic3RhcnRzLXdpdGgiLCIkQ29udGVudC1UeXBlIiwiIl0sWyJzdGFydHMtd2l0aCIsIiRrZXkiLCIiXV19',
+            signature: 'DsyFn+Gddc908PttZoeCYAxyrtg='
+          },
+          file: file
+        })
+        .success(function(){
+          $location.path('/todos')
+        });
       };
 
       function _setThumbnail () {
